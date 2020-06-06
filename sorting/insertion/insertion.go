@@ -1,20 +1,26 @@
 package insertion
 
-func Sort(list []int) []int {
-	sortedList := make([]int, len(list))
-	for i, value := range list {
-		sortedList = insert(list, i, value)
-	}
-	return sortedList
+type Sortable interface {
+	Len() int
+	Compare(i, j interface{}) bool
+	Transpose(i int, j interface{})
+	Get(i int) interface{}
 }
 
-func insert(list []int, pos int, value int) []int {
+func Sort(list Sortable) {
+	pos := 1
+	for pos < list.Len() {
+		insert(list, pos)
+		pos++
+	}
+}
+
+func insert(list Sortable, pos int) {
 	i := pos - 1
-	for i >= 0 && list[i] > value {
-		list[i+1] = list[i]
+	value := list.Get(pos)
+	for i >= 0 && list.Compare(list.Get(i), value) {
+		list.Transpose(i+1, list.Get(i))
 		i--
 	}
-	//sort.Sort()
-	list[i+1] = value
-	return list
+	list.Transpose(i+1, value)
 }
