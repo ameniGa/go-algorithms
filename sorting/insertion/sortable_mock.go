@@ -1,5 +1,6 @@
 package insertion
 
+// SortableMock mocks the interface Sortable
 type SortableMock struct {
 	GetLen       func() int
 	GetCompare   func(i, j interface{}) bool

@@ -1,5 +1,6 @@
 package insertion
 
+// Sortable should be implemented by type to sort
 type Sortable interface {
 	Len() int
 	Compare(i, j interface{}) bool
@@ -7,6 +8,7 @@ type Sortable interface {
 	Get(i int) interface{}
 }
 
+// Sort sorts a list which implements the Sortable interface
 func Sort(list Sortable) {
 	pos := 1
 	for pos < list.Len() {
